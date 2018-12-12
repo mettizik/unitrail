@@ -75,21 +75,15 @@ def main(options):
     debug('Done!')
     condition = mapping['filters']
     if 'section' in condition:
-        filtered_sections.append(apply_section_filters(
-            sections, condition['section']))
+        filtered_sections = apply_section_filter(
+            sections, condition['section'])
     debug('{} root sections are selected'.format(len(filtered_sections)))
 
     sections_to_parse = []
-    for sections_group in filtered_sections:
+    for filtered_section in filtered_sections:
         sections_to_parse += collect_children_sections(
-            sections, sections_group)
-        sections_to_parse += sections_group
-
-    """unique_sections = []
-    for section in sections_to_parse:
-        if section['id'] not in [x['id'] for x in unique_sections]:
-            unique_sections.append(section)
-    """
+            sections, [filtered_section])
+        sections_to_parse += [filtered_section]
 
     sections_ids = list(set([section['id'] for section in sections_to_parse]))
     info('{} unique sections selected'.format(len(sections_ids)))
