@@ -98,7 +98,7 @@ class APIClient:
     def get_sections(self, **kwargs):
         return self.send_get('get_sections/%s&%s' % (self.__project_id, parse.urlencode(kwargs)))
 
-    def add_run(self, module_name, name, description, case_ids):
+    def add_run(self, name, description, case_ids):
         data = {
             'name': name,
             'description': description,
@@ -106,6 +106,9 @@ class APIClient:
             'case_ids': case_ids
         }
         return self.send_post('add_run/' + self.__project_id, data)
+
+    def get_run(self, testrun_id):
+        return self.send_get('get_run/{}'.format(testrun_id))
 
 
 class APIError(Exception):

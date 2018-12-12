@@ -7,5 +7,9 @@
     "case": {
       "type_id": 1
     }
+  },
+  "testrun": {
+    "name": "Test of parser script",
+    "description": "Create a flexible filler for testrail"
   }
 }

@@ -94,7 +94,23 @@ def main(options):
     filtered_cases = []
     debug('Loaded {} cases totally'.format(len(cases)))
     if 'case' in condition:
-        filtered_cases.append(apply_case_filter(cases, condition['case']))
+        filtered_cases = apply_case_filter(cases, condition['case'])
+
+    info('{} unique cases selected'.format(len(filtered_cases)))
+
+    testrun = None
+    if not options.testrun:
+        debug('Creating new testrun for cases {}'.format(filtered_cases))
+        case_ids = [x['id'] for x in filtered_cases]
+
+        testrun = client.add_run(mapping['testrun']['name'],
+                                 mapping['testrun']['description'], case_ids)
+    else:
+        testrun = client.get_run(options.testrun)
+
+    info(
+        ' -> Working with testrun ({}) "{}"'.format(testrun['id'], testrun['name']))
+    info(' -> See it in browser {}'.format(testrun['url']))
 
 
 def collect_children_sections(sections, filtered_sections):
@@ -177,6 +193,12 @@ if __name__ == "__main__":
         type=FileType('r', encoding='UTF-8'),
         required=True,
         help='JSON file with mapping of the testcases in report to scenarios in testrail')
+
+    parser.add_argument(
+        '-t', '--testrun',
+        type=str,
+        help='Existing testrun ID, if not exists - new one will be created'
+    )
 
     options = parser.parse_args()
     main(options)
