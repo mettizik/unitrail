@@ -94,7 +94,7 @@ def main(options):
     filtered_cases = []
     debug('Loaded {} cases totally'.format(len(cases)))
     if 'case' in condition:
-        filtered_cases.append(apply_case_filters(cases, condition['case']))
+        filtered_cases.append(apply_case_filter(cases, condition['case']))
 
 
 def collect_children_sections(sections, filtered_sections):
@@ -110,14 +110,6 @@ def collect_children_sections(sections, filtered_sections):
     return children
 
 
-def apply_case_filters(cases, conditions):
-    results = []
-    for condition in conditions:
-        results += apply_case_filter(cases, condition)
-
-    return results
-
-
 def apply_case_filter(cases, condition):
     results = []
     debug('Applying case filter...')
@@ -127,14 +119,6 @@ def apply_case_filter(cases, condition):
         results += [
             x for x in cases if filter_key in x and x[filter_key] == filter_value]
     debug('Filtered {} cases to {}'.format(len(cases), len(results)))
-    return results
-
-
-def apply_section_filters(sections, conditions):
-    results = []
-    for condition in conditions:
-        results += apply_section_filter(sections, condition)
-
     return results
 
 
