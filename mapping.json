@@ -11,5 +11,8 @@
   "testrun": {
     "name": "Test of parser script",
     "description": "Create a flexible filler for testrail"
+  },
+  "mapping": {
+    "names": [""]
   }
 }

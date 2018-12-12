@@ -110,6 +110,9 @@ class APIClient:
     def get_run(self, testrun_id):
         return self.send_get('get_run/{}'.format(testrun_id))
 
+    def get_tests(self, testrun_id):
+        return self.send_get('get_tests/{}'.format(testrun_id))
+
 
 class APIError(Exception):
     pass

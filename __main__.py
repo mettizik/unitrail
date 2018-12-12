@@ -69,48 +69,54 @@ def main(options):
     client = APIClient(project_id, url=options.server, user=options.username,
                        password=options.password)
 
-    debug('Loading test sections from TestRail...')
-    sections = client.get_sections()
-    filtered_sections = []
-    debug('Done!')
-    condition = mapping['filters']
-    if 'section' in condition:
-        filtered_sections = apply_section_filter(
-            sections, condition['section'])
-    debug('{} root sections are selected'.format(len(filtered_sections)))
-
-    sections_to_parse = []
-    for filtered_section in filtered_sections:
-        sections_to_parse += collect_children_sections(
-            sections, [filtered_section])
-        sections_to_parse += [filtered_section]
-
-    sections_ids = list(set([section['id'] for section in sections_to_parse]))
-    info('{} unique sections selected'.format(len(sections_ids)))
-    debug('Loading cases for selected sections...')
-    cases = [case for case in client.get_cases() if case['section_id']
-             in sections_ids]
-
-    filtered_cases = []
-    debug('Loaded {} cases totally'.format(len(cases)))
-    if 'case' in condition:
-        filtered_cases = apply_case_filter(cases, condition['case'])
-
-    info('{} unique cases selected'.format(len(filtered_cases)))
-
     testrun = None
     if not options.testrun:
+        debug('Loading test sections from TestRail...')
+        sections = client.get_sections()
+        filtered_sections = []
+        debug('Done!')
+        condition = mapping['filters']
+        if 'section' in condition:
+            filtered_sections = apply_section_filter(
+                sections, condition['section'])
+        debug('{} root sections are selected'.format(len(filtered_sections)))
+
+        sections_to_parse = []
+        for filtered_section in filtered_sections:
+            sections_to_parse += collect_children_sections(
+                sections, [filtered_section])
+            sections_to_parse += [filtered_section]
+
+        sections_ids = list(set([section['id']
+                                 for section in sections_to_parse]))
+        info('{} unique sections selected'.format(len(sections_ids)))
+        debug('Loading cases for selected sections...')
+        cases = [case for case in client.get_cases() if case['section_id']
+                 in sections_ids]
+
+        filtered_cases = []
+        debug('Loaded {} cases totally'.format(len(cases)))
+        if 'case' in condition:
+            filtered_cases = apply_case_filter(cases, condition['case'])
+
+        info('{} unique cases selected'.format(len(filtered_cases)))
+
         debug('Creating new testrun for cases {}'.format(filtered_cases))
         case_ids = [x['id'] for x in filtered_cases]
 
         testrun = client.add_run(mapping['testrun']['name'],
                                  mapping['testrun']['description'], case_ids)
     else:
+        info('Loading testrun {}'.format(options.testrun))
         testrun = client.get_run(options.testrun)
 
+    testrun_id = testrun['id']
     info(
-        ' -> Working with testrun ({}) "{}"'.format(testrun['id'], testrun['name']))
+        ' -> Working with testrun ({}) "{}"'.format(testrun_id, testrun['name']))
     info(' -> See it in browser {}'.format(testrun['url']))
+
+    tests = client.get_tests(testrun_id)
+    info(tests)
 
 
 def collect_children_sections(sections, filtered_sections):
