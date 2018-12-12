@@ -98,26 +98,36 @@ def main(options):
 
 
 def collect_children_sections(sections, filtered_sections):
-    children = []
+    results = []
     for accepted_section in filtered_sections:
-        children += [
+        children = [
             section for section in sections if section['parent_id'] == accepted_section['id']]
-        if children:
-            debug('{} are children of {}'.format(
-                [x['name'] for x in children], accepted_section['name']))
-            children += collect_children_sections(sections, children)
 
-    return children
+        debug('There are {} children of {}'.format(
+            len(children), accepted_section['name']))
+        if children:
+            results += children
+            results += collect_children_sections(sections, children)
+
+    return results
+
+
+def apply_plain_filter(collection, condition):
+    results = []
+    for filter_key, filter_value in condition.items():
+        debug('Applying {} filter condition "{}"'.format(
+            filter_key, filter_value))
+        for item in collection:
+            if filter_key in item and item[filter_key] == filter_value:
+                results.append(item)
+
+    return results
 
 
 def apply_case_filter(cases, condition):
     results = []
     debug('Applying case filter...')
-    for filter_key, filter_value in condition.items():
-        debug('Applying {} filter condition "{}"'.format(
-            filter_key, filter_value))
-        results += [
-            x for x in cases if filter_key in x and x[filter_key] == filter_value]
+    results = apply_plain_filter(cases, condition)
     debug('Filtered {} cases to {}'.format(len(cases), len(results)))
     return results
 
@@ -125,10 +135,7 @@ def apply_case_filter(cases, condition):
 def apply_section_filter(sections, condition):
     results = []
     debug('Applying section filter...')
-    if 'name' in condition:
-        debug('Applying name filter condition "{}"'.format(condition['name']))
-        results = [x
-                   for x in sections if x['name'].lower() == condition['name'].lower()]
+    results = apply_plain_filter(sections, condition)
     debug('Filtered {} sections to {}'.format(len(sections), len(results)))
     return results
 
