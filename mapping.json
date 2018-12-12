@@ -1,0 +1,15 @@
+{
+  "project": "5",
+  "filters": {
+    "section": [
+      {
+        "name": "OxyOppo"
+      }
+    ],
+    "case": [
+      {
+        "type_id": 1
+      }
+    ]
+  }
+}
