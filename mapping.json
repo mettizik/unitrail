@@ -12,7 +12,27 @@
     "name": "Test of parser script",
     "description": "Create a flexible filler for testrail"
   },
-  "mapping": {
-    "names": [""]
-  }
+  "mapping": [
+    "case2test",
+    {
+      "matcher": "any",
+      "case": "Check binaries names",
+      "tests": ["Check DLL properties information", ".*download.*"]
+    },
+    {
+      "matcher": "any",
+      "case": "Check copyright in properties of binaries",
+      "tests": ["Check DLL properties information"]
+    },
+    {
+      "matcher": "any",
+      "case": "Check downloading with lan network",
+      "tests": [".*download.*"]
+    },
+    {
+      "matcher": "any",
+      "case": "Check downloading with external proxy",
+      "tests": [".*proxy.*"]
+    }
+  ]
 }

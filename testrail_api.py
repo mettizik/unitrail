@@ -113,6 +113,9 @@ class APIClient:
     def get_tests(self, testrun_id):
         return self.send_get('get_tests/{}'.format(testrun_id))
 
+    def send_results(self, test_id, **kwargs):
+        return self.send_post('add_result/%s' % test_id, kwargs)
+
 
 class APIError(Exception):
     pass

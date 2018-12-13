@@ -1,9 +1,11 @@
 from argparse import ArgumentParser, FileType
 import logging
 from logging import debug, info, warn
-from junitparser import JUnitXml
+from junitparser import JUnitXml, TestCase, Failure, Skipped, Error
 from testrail_api import APIClient
 from json import load
+from enum import Enum
+import re
 
 
 class LogFormatter(logging.Filter):
@@ -90,6 +92,7 @@ def main(options):
         sections_ids = list(set([section['id']
                                  for section in sections_to_parse]))
         info('{} unique sections selected'.format(len(sections_ids)))
+
         debug('Loading cases for selected sections...')
         cases = [case for case in client.get_cases() if case['section_id']
                  in sections_ids]
@@ -116,7 +119,111 @@ def main(options):
     info(' -> See it in browser {}'.format(testrun['url']))
 
     tests = client.get_tests(testrun_id)
-    info(tests)
+
+    test_results = []
+    for report in options.reports:
+        xml = JUnitXml.fromfile(report)
+        for suite in xml:
+            debug('Parsed testsuite: {}'.format(suite.name))
+            debug('Parsed {} test results'.format(len(suite)))
+            test_results += [case for case in suite]
+
+    info('Mapping execution results to TestRail cases')
+    mapped_results = map_results_to_cases(
+        test_results, tests, mapping['mapping'])
+    info('Pushing execution results to TestRail')
+    push_results(mapped_results, client)
+
+
+def map_results_to_cases(test_results, tests, mapping):
+    results = {}
+    for test in tests:
+        results[test['id']] = {
+            'test': test,
+            'results': get_results_for_test(test, test_results, mapping)
+        }
+
+    return results
+
+
+class TestStatus(Enum):
+    Passed = 1
+    Blocked = 2
+    Untested = 3
+    Retest = 4
+    Failed = 5
+
+
+def get_case_status(result: TestCase) -> TestStatus:
+    return {
+        'Failure': TestStatus.Failed,
+        'Error': TestStatus.Failed,
+        'Skipped': TestStatus.Untested,
+        'NoneType': TestStatus.Passed
+    }[result.result.__class__.__name__]
+
+
+def result_to_payload(result: TestCase):
+    payload = {}
+    payload['status_id'] = get_case_status(result).value
+    if payload['status_id'] != TestStatus.Untested:
+        payload['comment'] = """
+            Testsuite: {}
+            Testcase: 
+                {}
+            ===========================
+            Message: 
+                {}
+            Results details: 
+                {}
+            """.format(
+            result.classname,
+            result.name,
+            '{}: {}'.format(
+                result.result.type, result.result.message) if result.result is not None else 'Passed',
+            result.result._elem.text if result.result is not None else ''
+        )
+
+    return payload
+
+
+def push_results(results, testrail: APIClient):
+    for test_id, related_info in results.items():
+        results = related_info['results']
+        test = related_info['test']
+        if results:
+            debug('Processing test "{}", found {} related result{}'.format(
+                test['title'], len(results), '' if len(results) == 1 else 's'))
+            for result in results:
+                payload = result_to_payload(result)
+                if payload['status_id'] != TestStatus.Untested.value:
+                    testrail.send_results(test_id, **payload)
+
+
+def get_results_for_test(test, results, mapping):
+    related_results = []
+    if len(mapping) == 0 or 'case2test' in mapping:
+        related_results += [
+            result for result in results if result.name.lower() == test['title'].lower()]
+    for mapper in [m for m in mapping if type(m) == dict]:
+        mapped_results = []
+        if mapper['case'] == test['title']:
+            for pattern in mapper['tests']:
+                title_pattern = re.compile(pattern.lower())
+                mapped_results += [
+                    result for result in results if title_pattern.match(result.name.lower())]
+        related_results += merge_results(mapped_results, mapper)
+    return related_results
+
+
+def merge_results(mapped_results, mapper):
+    merged = []
+    matcher = mapper['matcher']
+    if matcher == 'any':
+        for result in mapped_results:
+            if result.result is None:
+                return [result]
+    return merged
 
 
 def collect_children_sections(sections, filtered_sections):

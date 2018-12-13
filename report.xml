@@ -1,24 +1,115 @@
 <testsuites>
-	<testsuite id="1" tests="8" failures="5" package="F:\Work\oxygen\autotests\OxyMi\specs\OxyMi\06_Get Calendars\downloading_calendars.spec" time="105.275" timestamp="2018-11-21T11:25:30" name="OxyMi Calendars downloading" errors="0" hostname="MOKYCH-A-02-PC">
+	<testsuite id="1" tests="4" failures="0" package="F:\Work\oxygen\autotests\OxyOppo\specs\OxyOppo\99_fast\fast.spec" time="32.002" timestamp="2018-12-13T10:39:03" name="OxyOppo fast autotests" errors="0" hostname="MOKYCH-A-02-PC">
 		<properties></properties>
-		<testcase classname="OxyMi Calendars downloading" name="Get Calendars with valid token" time="15.243"></testcase>
-		<testcase classname="OxyMi Calendars downloading" name="Get big amount of Calendars" time="0.276">
-			<failure message="Peek authenticated accounts with tags &#34;big data&#34;&#xA;Step Execution Failure: &#39;No matching accounts with tags [&#39;big data&#39;] found!&#39;" type="Peek authenticated accounts with tags &#34;big data&#34;&#xA;Step Execution Failure: &#39;No matching accounts with tags [&#39;big data&#39;] found!&#39;">Traceback (most recent call last):&#xA;  File &#34;C:\Users\mokych.andrey\AppData\Roaming\Python\Python37\site-packages\getgauge\executor.py&#34;, line 31, in execute_method&#xA;    func(*params)&#xA;  File &#34;F:\Work\oxygen\autotests\EnvUtils\EnvironmentBase.py&#34;, line 44, in wrapper&#xA;    raise err&#xA;  File &#34;F:\Work\oxygen\autotests\EnvUtils\EnvironmentBase.py&#34;, line 38, in wrapper&#xA;    return func(get_env(), *args, **kwargs)&#xA;  File &#34;F:\Work\oxygen\autotests\OxyMi\step_impl\step_impl.py&#34;, line 66, in peek_authenticated_accounts&#xA;    accs = env.get_authenticated_accounts_with_tags(tags_list)&#xA;  File &#34;F:\Work\oxygen\autotests\EnvUtils\mixins\CloudClient.py&#34;, line 24, in get_authenticated_accounts_with_tags&#xA;    return CloudClient.filter_accounts_by_tags(accounts, tags)&#xA;  File &#34;F:\Work\oxygen\autotests\EnvUtils\mixins\CloudClient.py&#34;, line 42, in filter_accounts_by_tags&#xA;    &#39;No matching accounts with tags {} found!&#39;.format(tags))&#xA;RuntimeError: No matching accounts with tags [&#39;big data&#39;] found!&#xA;</failure>
+		<testcase classname="OxyOppo fast autotests" name="Request token with valid credentials" time="2.319"></testcase>
+		<testcase classname="OxyOppo fast autotests" name="Get Userinfo with valid token" time="1.411"></testcase>
+		<testcase classname="OxyOppo fast autotests" name="Get Contacts with valid token" time="14.254"></testcase>
+		<testcase classname="OxyOppo fast autotests" name="Get Messages with valid token" time="14.018"></testcase>
+		<system-out></system-out>
+		<system-err></system-err>
+	</testsuite>
+	<testsuite id="2" tests="9" failures="0" package="F:\Work\oxygen\autotests\OxyOppo\specs\OxyOppo\99_fast\fast_proxy.spec" time="104.238" timestamp="2018-12-13T10:39:03" name="OxyOppo fast proxy autotests" errors="0" hostname="MOKYCH-A-02-PC">
+		<properties></properties>
+		<testcase classname="OxyOppo fast proxy autotests" name="Request token with Chinese proxy" time="1.913"></testcase>
+		<testcase classname="OxyOppo fast proxy autotests" name="Request token with Russian proxy" time="2.012"></testcase>
+		<testcase classname="OxyOppo fast proxy autotests" name="Request token with USA proxy" time="2.075"></testcase>
+		<testcase classname="OxyOppo fast proxy autotests" name="Get Contacts with Chinese proxy" time="15.686"></testcase>
+		<testcase classname="OxyOppo fast proxy autotests" name="Get Contacts with Russian proxy" time="11.895"></testcase>
+		<testcase classname="OxyOppo fast proxy autotests" name="Get Contacts with USA proxy" time="15.618"></testcase>
+		<testcase classname="OxyOppo fast proxy autotests" name="Get Messages with Chinese proxy" time="19.335"></testcase>
+		<testcase classname="OxyOppo fast proxy autotests" name="Get Messages with Russian proxy" time="14.632"></testcase>
+		<testcase classname="OxyOppo fast proxy autotests" name="Get Messages with USA proxy" time="21.071"></testcase>
+		<system-out></system-out>
+		<system-err></system-err>
+	</testsuite>
+	<testsuite id="3" tests="1" failures="0" package="F:\Work\oxygen\autotests\OxyOppo\specs\OxyOppo\00_General\version.spec" time="0.002" timestamp="2018-12-13T10:39:03" name="Version check" errors="0" hostname="MOKYCH-A-02-PC">
+		<properties></properties>
+		<testcase classname="Version check" name="Check DLL properties information" time="0.001"></testcase>
+		<system-out></system-out>
+		<system-err></system-err>
+	</testsuite>
+	<testsuite id="4" tests="6" failures="0" package="F:\Work\oxygen\autotests\OxyOppo\specs\OxyOppo\01_Get Token\authentication.spec" time="27.835" timestamp="2018-12-13T10:39:03" name="OxyOppo authentication" errors="0" hostname="MOKYCH-A-02-PC">
+		<properties></properties>
+		<testcase classname="OxyOppo authentication" name="Request token with valid credentials" time="6.649"></testcase>
+		<testcase classname="OxyOppo authentication" name="Request token with invalid login" time="1.022"></testcase>
+		<testcase classname="OxyOppo authentication" name="Request token with invalid password" time="1.122"></testcase>
+		<testcase classname="OxyOppo authentication" name="Request token with Chinese proxy" time="6.646"></testcase>
+		<testcase classname="OxyOppo authentication" name="Request token with Russian proxy" time="5.350"></testcase>
+		<testcase classname="OxyOppo authentication" name="Request token with USA proxy" time="7.045"></testcase>
+		<system-out></system-out>
+		<system-err></system-err>
+	</testsuite>
+	<testsuite id="5" tests="11" failures="1" package="F:\Work\oxygen\autotests\OxyOppo\specs\OxyOppo\03_Get Contacts\downloading_contacts.spec" time="180.287" timestamp="2018-12-13T10:39:03" name="OxyOppo Contacts downloading" errors="0" hostname="MOKYCH-A-02-PC">
+		<properties></properties>
+		<testcase classname="OxyOppo Contacts downloading" name="Get Contacts with valid token" time="23.380"></testcase>
+		<testcase classname="OxyOppo Contacts downloading" name="Download Contacts to long path" time="24.593"></testcase>
+		<testcase classname="OxyOppo Contacts downloading" name="Download Contacts to unicode path" time="23.351"></testcase>
+		<testcase classname="OxyOppo Contacts downloading" name="Get Contacts with invalid token" time="0.780"></testcase>
+		<testcase classname="OxyOppo Contacts downloading" name="Get empty Contacts list" time="2.704">
+			<failure message="Check that HRESULT of &#34;DownloadContacts&#34; is &#34;E_EMPTY_CATEGORY&#34;&#xA;Step Execution Failure: &#39;Error code E_CLOUD_DATA_RECEIVE_ERROR not matches expected: &#39;E_EMPTY_CATEGORY&#39;&#39;" type="Check that HRESULT of &#34;DownloadContacts&#34; is &#34;E_EMPTY_CATEGORY&#34;&#xA;Step Execution Failure: &#39;Error code E_CLOUD_DATA_RECEIVE_ERROR not matches expected: &#39;E_EMPTY_CATEGORY&#39;&#39;">Traceback (most recent call last):&#xA;  File &#34;C:\Users\mokych.andrey\AppData\Roaming\Python\Python37\site-packages\getgauge\executor.py&#34;, line 31, in execute_method&#xA;    func(*params)&#xA;  File &#34;F:\Work\oxygen\autotests\commons\TestUtils\threads.py&#34;, line 88, in wrapper&#xA;    return func(*args, threads=background_threads, **kwargs)&#xA;  File &#34;F:\Work\oxygen\autotests\commons\TestUtils\common_steps.py&#34;, line 25, in check_hresult&#xA;    actual_error, &#39;, &#39;.join(expecteds)))&#xA;AssertionError: Error code E_CLOUD_DATA_RECEIVE_ERROR not matches expected: &#39;E_EMPTY_CATEGORY&#39;&#xA;</failure>
 		</testcase>
-		<testcase classname="OxyMi Calendars downloading" name="Get Calendars with invalid token" time="1.337">
-			<failure message="Multiple failures" type="Multiple failures">Check that HRESULT of &#34;DownloadCalendars&#34; is &#34;E_AUTHORIZATION_ERROR&#34;&#xA;Step Execution Failure: &#39;Error code E_USR_PWD_ERROR not matches expected: &#39;E_AUTHORIZATION_ERROR&#39;&#39;&#xA;Traceback (most recent call last):&#xA;  File &#34;C:\Users\mokych.andrey\AppData\Roaming\Python\Python37\site-packages\getgauge\executor.py&#34;, line 31, in execute_method&#xA;    func(*params)&#xA;  File &#34;F:\Work\oxygen\autotests\TestUtils\threads.py&#34;, line 88, in wrapper&#xA;    return func(*args, threads=background_threads, **kwargs)&#xA;  File &#34;F:\Work\oxygen\autotests\TestUtils\common_steps.py&#34;, line 25, in check_hresult&#xA;    actual_error, &#39;, &#39;.join(expecteds)))&#xA;AssertionError: Error code E_USR_PWD_ERROR not matches expected: &#39;E_AUTHORIZATION_ERROR&#39;&#xA;&#xA;&#xA;Check that &#34;DownloadCalendars&#34; created database&#xA;Step Execution Failure: &#39;File F:\Work\oxygen\autotests\OxyMi\temp\OxyMi\06_Get Calendars\downloading_calendars\get_calendars_with_invalid_token\uuxr@erasf.com\simple path\Calendars\Calendars.db does not exist&#39;&#xA;Traceback (most recent call last):&#xA;  File &#34;C:\Users\mokych.andrey\AppData\Roaming\Python\Python37\site-packages\getgauge\executor.py&#34;, line 31, in execute_method&#xA;    func(*params)&#xA;  File &#34;F:\Work\oxygen\autotests\OxyMi\step_impl\verification_steps.py&#34;, line 45, in check_database_created&#xA;    verify_file_exists(db_path)&#xA;  File &#34;F:\Work\oxygen\autotests\TestUtils\fs.py&#34;, line 25, in verify_file_exists&#xA;    raise AssertionError(&#39;File {} does not exist&#39;.format(filepath))&#xA;AssertionError: File F:\Work\oxygen\autotests\OxyMi\temp\OxyMi\06_Get Calendars\downloading_calendars\get_calendars_with_invalid_token\uuxr@erasf.com\simple path\Calendars\Calendars.db does not exist&#xA;</failure>
+		<testcase classname="OxyOppo Contacts downloading" name="Get big amount of Contacts" time="26.487"></testcase>
+		<testcase classname="OxyOppo Contacts downloading" name="Get Contacts from several backups" time="13.717"></testcase>
+		<testcase classname="OxyOppo Contacts downloading" name="Get Contacts with avatars" time="14.207"></testcase>
+		<testcase classname="OxyOppo Contacts downloading" name="Get Contacts with Chinese proxy" time="18.639"></testcase>
+		<testcase classname="OxyOppo Contacts downloading" name="Get Contacts with Russian proxy" time="13.578"></testcase>
+		<testcase classname="OxyOppo Contacts downloading" name="Get Contacts with USA proxy" time="18.851"></testcase>
+		<system-out></system-out>
+		<system-err></system-err>
+	</testsuite>
+	<testsuite id="6" tests="4" failures="0" package="F:\Work\oxygen\autotests\OxyOppo\specs\OxyOppo\05_Progress\progress.spec" time="32.944" timestamp="2018-12-13T10:39:03" name="OxyOppo downloading progress" errors="0" hostname="MOKYCH-A-02-PC">
+		<properties></properties>
+		<testcase classname="OxyOppo downloading progress" name="Get progress of Contacts downloading" time="13.655"></testcase>
+		<testcase classname="OxyOppo downloading progress" name="Get progress of empty Contacts downloading" time="2.616"></testcase>
+		<testcase classname="OxyOppo downloading progress" name="Get progress of Messages downloading" time="13.857"></testcase>
+		<testcase classname="OxyOppo downloading progress" name="Get progress of empty Messages downloading" time="2.816"></testcase>
+		<system-out></system-out>
+		<system-err></system-err>
+	</testsuite>
+	<testsuite id="7" tests="2" failures="0" package="F:\Work\oxygen\autotests\OxyOppo\specs\OxyOppo\00_General\logging.spec" time="0.038" timestamp="2018-12-13T10:39:03" name="OxyOppo Logging features" errors="0" hostname="MOKYCH-A-02-PC">
+		<properties></properties>
+		<testcase classname="OxyOppo Logging features" name="Initialize loging with valid path and level" time="0.009"></testcase>
+		<testcase classname="OxyOppo Logging features" name="Initialize loging with invalid level" time="0.021"></testcase>
+		<system-out></system-out>
+		<system-err></system-err>
+	</testsuite>
+	<testsuite id="8" tests="5" failures="0" package="F:\Work\oxygen\autotests\OxyOppo\specs\OxyOppo\02_Get userinfo\downloading_userinfo.spec" time="28.627" timestamp="2018-12-13T10:39:03" name="OxyOppo Userinfo downloading" errors="0" hostname="MOKYCH-A-02-PC">
+		<properties></properties>
+		<testcase classname="OxyOppo Userinfo downloading" name="Get Userinfo with valid token" time="12.305"></testcase>
+		<testcase classname="OxyOppo Userinfo downloading" name="Get Userinfo with invalid token" time="0.805"></testcase>
+		<testcase classname="OxyOppo Userinfo downloading" name="Get Userinfo with Unicode username" time="5.825"></testcase>
+		<testcase classname="OxyOppo Userinfo downloading" name="Save Userinfo to long path" time="4.379"></testcase>
+		<testcase classname="OxyOppo Userinfo downloading" name="Save Userinfo to unicode path" time="5.313"></testcase>
+		<system-out></system-out>
+		<system-err></system-err>
+	</testsuite>
+	<testsuite id="9" tests="10" failures="1" package="F:\Work\oxygen\autotests\OxyOppo\specs\OxyOppo\04_Get Messages\downloading_messages.spec" time="113.793" timestamp="2018-12-13T10:39:03" name="OxyOppo Messages downloading" errors="0" hostname="MOKYCH-A-02-PC">
+		<properties></properties>
+		<testcase classname="OxyOppo Messages downloading" name="Get Messages with valid token" time="16.873"></testcase>
+		<testcase classname="OxyOppo Messages downloading" name="Get Messages with invalid token" time="0.770"></testcase>
+		<testcase classname="OxyOppo Messages downloading" name="Get empty Messages list" time="2.263">
+			<failure message="Check that HRESULT of &#34;DownloadMessages&#34; is &#34;E_EMPTY_CATEGORY&#34;&#xA;Step Execution Failure: &#39;Error code E_CLOUD_DATA_RECEIVE_ERROR not matches expected: &#39;E_EMPTY_CATEGORY&#39;&#39;" type="Check that HRESULT of &#34;DownloadMessages&#34; is &#34;E_EMPTY_CATEGORY&#34;&#xA;Step Execution Failure: &#39;Error code E_CLOUD_DATA_RECEIVE_ERROR not matches expected: &#39;E_EMPTY_CATEGORY&#39;&#39;">Traceback (most recent call last):&#xA;  File &#34;C:\Users\mokych.andrey\AppData\Roaming\Python\Python37\site-packages\getgauge\executor.py&#34;, line 31, in execute_method&#xA;    func(*params)&#xA;  File &#34;F:\Work\oxygen\autotests\commons\TestUtils\threads.py&#34;, line 88, in wrapper&#xA;    return func(*args, threads=background_threads, **kwargs)&#xA;  File &#34;F:\Work\oxygen\autotests\commons\TestUtils\common_steps.py&#34;, line 25, in check_hresult&#xA;    actual_error, &#39;, &#39;.join(expecteds)))&#xA;AssertionError: Error code E_CLOUD_DATA_RECEIVE_ERROR not matches expected: &#39;E_EMPTY_CATEGORY&#39;&#xA;</failure>
 		</testcase>
-		<testcase classname="OxyMi Calendars downloading" name="Get empty Calendars list" time="0.234">
-			<failure message="Peek authenticated accounts with tags &#34;empty data&#34;&#xA;Step Execution Failure: &#39;No matching accounts with tags [&#39;empty data&#39;] found!&#39;" type="Peek authenticated accounts with tags &#34;empty data&#34;&#xA;Step Execution Failure: &#39;No matching accounts with tags [&#39;empty data&#39;] found!&#39;">Traceback (most recent call last):&#xA;  File &#34;C:\Users\mokych.andrey\AppData\Roaming\Python\Python37\site-packages\getgauge\executor.py&#34;, line 31, in execute_method&#xA;    func(*params)&#xA;  File &#34;F:\Work\oxygen\autotests\EnvUtils\EnvironmentBase.py&#34;, line 44, in wrapper&#xA;    raise err&#xA;  File &#34;F:\Work\oxygen\autotests\EnvUtils\EnvironmentBase.py&#34;, line 38, in wrapper&#xA;    return func(get_env(), *args, **kwargs)&#xA;  File &#34;F:\Work\oxygen\autotests\OxyMi\step_impl\step_impl.py&#34;, line 66, in peek_authenticated_accounts&#xA;    accs = env.get_authenticated_accounts_with_tags(tags_list)&#xA;  File &#34;F:\Work\oxygen\autotests\EnvUtils\mixins\CloudClient.py&#34;, line 24, in get_authenticated_accounts_with_tags&#xA;    return CloudClient.filter_accounts_by_tags(accounts, tags)&#xA;  File &#34;F:\Work\oxygen\autotests\EnvUtils\mixins\CloudClient.py&#34;, line 42, in filter_accounts_by_tags&#xA;    &#39;No matching accounts with tags {} found!&#39;.format(tags))&#xA;RuntimeError: No matching accounts with tags [&#39;empty data&#39;] found!&#xA;</failure>
+		<testcase classname="OxyOppo Messages downloading" name="Download Messages to long path" time="17.720"></testcase>
+		<testcase classname="OxyOppo Messages downloading" name="Download Messages to unicode path" time="15.718"></testcase>
+		<testcase classname="OxyOppo Messages downloading" name="Get Messages with one recepient" time="6.644"></testcase>
+		<testcase classname="OxyOppo Messages downloading" name="Get big amount of Messages" time="0.000">
+			<skipped message="F:\Work\oxygen\autotests\OxyOppo\specs\OxyOppo\04_Get Messages\downloading_messages.spec:79 Step implementation not found =&gt; &#39;Check that number of records for &#34;Messages&#34; in manifest is equal to &#34;3185&#34;&#39;"></skipped>
 		</testcase>
-		<testcase classname="OxyMi Calendars downloading" name="Get Calendars from account without devices" time="0.217">
-			<failure message="Peek authenticated accounts with tags &#34;without devices&#34;&#xA;Step Execution Failure: &#39;No matching accounts with tags [&#39;without devices&#39;] found!&#39;" type="Peek authenticated accounts with tags &#34;without devices&#34;&#xA;Step Execution Failure: &#39;No matching accounts with tags [&#39;without devices&#39;] found!&#39;">Traceback (most recent call last):&#xA;  File &#34;C:\Users\mokych.andrey\AppData\Roaming\Python\Python37\site-packages\getgauge\executor.py&#34;, line 31, in execute_method&#xA;    func(*params)&#xA;  File &#34;F:\Work\oxygen\autotests\EnvUtils\EnvironmentBase.py&#34;, line 44, in wrapper&#xA;    raise err&#xA;  File &#34;F:\Work\oxygen\autotests\EnvUtils\EnvironmentBase.py&#34;, line 38, in wrapper&#xA;    return func(get_env(), *args, **kwargs)&#xA;  File &#34;F:\Work\oxygen\autotests\OxyMi\step_impl\step_impl.py&#34;, line 66, in peek_authenticated_accounts&#xA;    accs = env.get_authenticated_accounts_with_tags(tags_list)&#xA;  File &#34;F:\Work\oxygen\autotests\EnvUtils\mixins\CloudClient.py&#34;, line 24, in get_authenticated_accounts_with_tags&#xA;    return CloudClient.filter_accounts_by_tags(accounts, tags)&#xA;  File &#34;F:\Work\oxygen\autotests\EnvUtils\mixins\CloudClient.py&#34;, line 42, in filter_accounts_by_tags&#xA;    &#39;No matching accounts with tags {} found!&#39;.format(tags))&#xA;RuntimeError: No matching accounts with tags [&#39;without devices&#39;] found!&#xA;</failure>
-		</testcase>
-		<testcase classname="OxyMi Calendars downloading" name="Get Calendars with Chinese proxy" time="23.673"></testcase>
-		<testcase classname="OxyMi Calendars downloading" name="Get Calendars with Russian proxy" time="40.449">
-			<failure message="Multiple failures" type="Multiple failures">Check that HRESULT of &#34;DownloadCalendars&#34; is &#34;S_OK&#34;&#xA;Step Execution Failure: &#39;Error code E_NETWORK_ERROR not matches expected: &#39;S_OK&#39;&#39;&#xA;Traceback (most recent call last):&#xA;  File &#34;C:\Users\mokych.andrey\AppData\Roaming\Python\Python37\site-packages\getgauge\executor.py&#34;, line 31, in execute_method&#xA;    func(*params)&#xA;  File &#34;F:\Work\oxygen\autotests\TestUtils\threads.py&#34;, line 88, in wrapper&#xA;    return func(*args, threads=background_threads, **kwargs)&#xA;  File &#34;F:\Work\oxygen\autotests\TestUtils\common_steps.py&#34;, line 25, in check_hresult&#xA;    actual_error, &#39;, &#39;.join(expecteds)))&#xA;AssertionError: Error code E_NETWORK_ERROR not matches expected: &#39;S_OK&#39;&#xA;&#xA;&#xA;Check that number of records for &#34;Calendars&#34; in manifest is equal to number of records in database&#xA;Step Execution Failure: &#39;0 is not equal to 220&#39;&#xA;Traceback (most recent call last):&#xA;  File &#34;C:\Users\mokych.andrey\AppData\Roaming\Python\Python37\site-packages\getgauge\executor.py&#34;, line 31, in execute_method&#xA;    func(*params)&#xA;  File &#34;F:\Work\oxygen\autotests\OxyMi\step_impl\verification_steps.py&#34;, line 82, in compare_records_from_manifest_and_database&#xA;    expect_eq(expected_count, actual_count)&#xA;  File &#34;F:\Work\oxygen\autotests\TestUtils\expects.py&#34;, line 8, in expect_eq&#xA;    raise AssertionError(error_message_format.format(actual=actual, expected=expected, **kwargs))&#xA;AssertionError: 0 is not equal to 220&#xA;</failure>
-		</testcase>
-		<testcase classname="OxyMi Calendars downloading" name="Get Calendars with USA proxy" time="23.841"></testcase>
+		<testcase classname="OxyOppo Messages downloading" name="Get Messages with Chinese proxy" time="19.065"></testcase>
+		<testcase classname="OxyOppo Messages downloading" name="Get Messages with Russian proxy" time="13.458"></testcase>
+		<testcase classname="OxyOppo Messages downloading" name="Get Messages with USA proxy" time="21.282"></testcase>
+		<system-out></system-out>
+		<system-err></system-err>
+	</testsuite>
+	<testsuite id="10" tests="6" failures="0" package="F:\Work\oxygen\autotests\OxyOppo\specs\OxyOppo\06_Cancel\cancel.spec" time="50.990" timestamp="2018-12-13T10:39:03" name="OxyOppo cancel downloading" errors="0" hostname="MOKYCH-A-02-PC">
+		<properties></properties>
+		<testcase classname="OxyOppo cancel downloading" name="Cancel when one category is finished downloading" time="28.752"></testcase>
+		<testcase classname="OxyOppo cancel downloading" name="Cancel on contacts downloading" time="5.754"></testcase>
+		<testcase classname="OxyOppo cancel downloading" name="Cancel on contacts saving to DB" time="7.009"></testcase>
+		<testcase classname="OxyOppo cancel downloading" name="Cancel on chat list downloading" time="2.013"></testcase>
+		<testcase classname="OxyOppo cancel downloading" name="Cancel on messages downloading" time="2.993"></testcase>
+		<testcase classname="OxyOppo cancel downloading" name="Cancel on messages saving to DB" time="4.469"></testcase>
 		<system-out></system-out>
 		<system-err></system-err>
 	</testsuite>
