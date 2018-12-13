@@ -131,8 +131,10 @@ def main(options):
     info('Mapping execution results to TestRail cases')
     mapped_results = map_results_to_cases(
         test_results, tests, mapping['mapping'])
-    info('Pushing execution results to TestRail')
+    info('Pushing execution results to TestRail...')
     push_results(mapped_results, client)
+    info('Test execution results are pushed to test run {}'.format(
+        testrun['url']))
 
 
 def map_results_to_cases(test_results, tests, mapping):
@@ -188,6 +190,9 @@ def result_to_payload(result: TestCase):
 
 
 def push_results(results, testrail: APIClient):
+    total_count = len(results.items())
+    current_item = 0
+    submitted_results = 0
     for test_id, related_info in results.items():
         results = related_info['results']
         test = related_info['test']
@@ -198,6 +203,13 @@ def push_results(results, testrail: APIClient):
                 payload = result_to_payload(result)
                 if payload['status_id'] != TestStatus.Untested.value:
                     testrail.send_results(test_id, **payload)
+
+            submitted_results += 1
+        current_item += 1
+        debug('{}% cases processed'.format(
+            int((current_item / total_count) * 100)))
+    info('Submitted {} results to testrail. Coverage: {}%'.format(
+        submitted_results, int((submitted_results / total_count) * 100)))
 
 
 def get_results_for_test(test, results, mapping):
