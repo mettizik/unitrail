@@ -24,7 +24,9 @@ Checkout sources and run `python setup.py install`
 
 ### Using pip
 
-TODO
+```bash
+$ pip install unitrail
+```
 
 ## Basic usage
 
