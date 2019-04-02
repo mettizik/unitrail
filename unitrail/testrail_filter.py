@@ -10,13 +10,18 @@ def create_testrun(client, mapping):
     if 'section' in condition:
         filtered_sections = apply_section_filter(
             sections, condition['section'])
+    
     debug('{} root sections are selected'.format(len(filtered_sections)))
 
     sections_to_parse = []
-    for filtered_section in filtered_sections:
-        sections_to_parse += collect_children_sections(
-            sections, [filtered_section])
-        sections_to_parse += [filtered_section]
+    if not filtered_sections:
+        debug('No sections listed for filter - taking them all')
+        sections_to_parse = sections
+    else:
+        for filtered_section in filtered_sections:
+            sections_to_parse += collect_children_sections(
+                sections, [filtered_section])
+            sections_to_parse += [filtered_section]
 
     sections_ids = list(set([section['id']
                              for section in sections_to_parse]))

@@ -53,7 +53,7 @@ class APIClient:
     # data                The data to submit as part of the request (as
     #                     Python dict, strings must be UTF-8 encoded)
     #
-    def send_post(self, uri, data):
+    def send_post(self, uri, data=None):
         return self.__send_request('POST', uri, data)
 
     def __send_request(self, method, uri, data):
@@ -109,6 +109,9 @@ class APIClient:
 
     def get_run(self, testrun_id):
         return self.send_get('get_run/{}'.format(testrun_id))
+
+    def close_run(self, testrun_id):
+        return self.send_post('close_run/{}'.format(testrun_id))
 
     def get_tests(self, testrun_id):
         return self.send_get('get_tests/{}'.format(testrun_id))

@@ -1,6 +1,6 @@
 from logging import debug, info, warn
 from junitparser import JUnitXml, TestCase, Failure, Skipped, Error
-from testrail_api import APIClient
+from unitrail.testrail_api import APIClient
 from enum import Enum
 
 
@@ -38,7 +38,7 @@ def result_to_payload(result: TestCase):
             result.classname,
             result.name,
             '{}: {}'.format(
-                result.result.type, result.result.message) if result.result is not None else 'Passed',
+                result.result.type, result.result.message) if result.result is not None else result.system_out,
             result.result._elem.text if result.result is not None else ''
         )
 
@@ -65,4 +65,4 @@ def push_results(results, testrail: APIClient):
         debug('{}% cases processed'.format(
             int((current_item / total_count) * 100)))
     info('Submitted {} results to testrail. Estimated coverage: {}%'.format(
-        submitted_results, int((submitted_results / total_count) * 100)))
+        submitted_results, int((submitted_results / total_count) * 100)))    
