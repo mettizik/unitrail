@@ -49,9 +49,15 @@ def __main(options):
         info('Test execution results are pushed to test run {}'.format(
             testrun['url']))
         testrail_results = client.get_run(testrun_id)
-        if testrail_results['failed_count'] == 0:
-            info('Since there are no failed tests, test run will be closed..')
-            client.close_run(testrun_id)
+        if options.leaveopen:
+            info('Test run will not be closed')
+        else:
+            if options.forceclose:
+                info('Closing testrun due to forced close option set')
+                client.close_run(testrun_id)
+            elif testrail_results['failed_count'] == 0:
+                info('Since there are no failed tests, test run will be closed..')
+                client.close_run(testrun_id)
 
     except Exception as err:
         error(err)
@@ -102,7 +108,7 @@ def make_parser():
         '-p', '--password',
         type=str,
         required=True,
-        help='Password to authenticate in TestRail')
+        help='Password or API key to authenticate in TestRail')
 
     parser.add_argument(
         '-m', '--mapping',
@@ -114,6 +120,18 @@ def make_parser():
         '-t', '--testrun',
         type=str,
         help='Existing testrun ID, if not exists - new one will be created'
+    )
+
+    parser.add_argument(
+        '-O', '--leaveopen',
+        action='store_true',
+        help='Do not close test run after execution. Defaults to false'
+    )
+
+    parser.add_argument(
+        '-C', '--forceclose',
+        action='store_true',
+        help='Close test run in the end, nevermind of tests execution results. Defaults to false'
     )
 
     parser.add_argument(
@@ -130,3 +148,7 @@ def make_parser():
 def main():
     parser = make_parser()
     __main(parser.parse_args())
+
+
+if __name__ == '__main__':
+    main()

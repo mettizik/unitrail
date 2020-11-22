@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='unitrail',
-    version='0.0.3',
+    version='0.0.4',
     description='CLI for autotests connection with Testrail',
     long_description='# UniTrail',
     long_description_content_type='text/markdown',
