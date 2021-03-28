@@ -23,7 +23,7 @@ def __main(options):
         debug(mapping)
         project_id = mapping["project"]
         client = APIClient(project_id, url=options.server, user=options.username,
-                           password=options.password)
+                           password=options.password, notls=options.noverify, cacert=options.ca)
 
         if not options.testrun:
             info('Creating new test run since there is no testrun provided')
@@ -120,6 +120,18 @@ def make_parser():
         '-t', '--testrun',
         type=str,
         help='Existing testrun ID, if not exists - new one will be created'
+    )
+
+    parser.add_argument(
+        '-c', '--ca',
+        type=str,
+        help='Path to the root CA for self-signed certificates'
+    )
+
+    parser.add_argument(
+        '-k', '--noverify',
+        action='store_true',
+        help='Disable TLS verification (not recommended)'
     )
 
     parser.add_argument(

@@ -15,16 +15,17 @@ import urllib.error
 from urllib import parse
 import json
 import base64
+import ssl
 
 
 class APIClient:
-    def __init__(self, project_id, url='localhost', user='admin', password='admin'):
+    def __init__(self, project_id, url='localhost', user='admin', password='admin', cacert=None, notls=False):
         self.user = user
         self.password = password
         self.__url = url
-
-        # The ID of Oxygen: OxyClouds project in TestRail is 5
         self.__project_id = project_id
+        self.__ca = cacert
+        self.__notls = notls
 
     #
     # Send Get
@@ -72,7 +73,14 @@ class APIClient:
 
         e = None
         try:
-            response = urllib.request.urlopen(request).read()
+            if self.__notls:
+                response = urllib.request.urlopen(
+                    request, context=ssl.SSLContext())
+            elif self.__ca:
+                response = urllib.request.urlopen(
+                    request, cafile=self.__ca).read()
+            else:
+                response = urllib.request.urlopen(request).read()
         except urllib.error.HTTPError as ex:
             response = ex.read()
             e = ex
